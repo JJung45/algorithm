@@ -1,13 +1,16 @@
 function solution(s) { // try hello world
-    var answer_array = s.split(" ");
+    var s_array = s.split(" ");
     var result = [];
 
-    answer_array.map(function(item, key){
-        item.split("").map(function(item1, key1){
-            result[key1] = (key1%2 == 0 ? item1.toUpperCase() : item1.toLowerCase());
+    for(var i = 0; i<s_array.length; i++) {
+        s_array[i] = s_array[i].split("");
+        s_array[i].forEach(function(item, key, arr){
+            key % 2 == 0
+                ? arr[key] = arr[key].toUpperCase()
+                : arr[key] = arr[key].toLowerCase();
         });
-        answer_array[key] = result.join("");
-    });
+        s_array[i] = s_array[i].join('');
+    }
 
-    return answer_array.join(" "); // TrY HeLlO WoRlD
+    return s_array.join(' '); //TrY HeLlO WoRlD
 }
