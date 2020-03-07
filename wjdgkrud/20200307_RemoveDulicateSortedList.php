@@ -16,14 +16,15 @@
  */
 class Solution {
 
-    /**
-     * @param ListNode $head
-     * @return ListNode
-     */
     function deleteDuplicates($head) {
 
-        if ($head->val ==  $head->next) {
-            $head->next = $head->next->next;
+        $current = $head;
+        while($current != null && $current->next != null) {
+            if($current->next->val == $current->val) {
+                $current->next = $current->next->next;
+            } else {
+                $current = $current->next;
+            }
         }
 
         return $head;
