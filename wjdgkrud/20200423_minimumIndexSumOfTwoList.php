@@ -14,30 +14,27 @@ class Solution {
      * @return String[]
      */
     function findRestaurant($list1, $list2) {
+        /**
+         * ["Shogun","Tapioca Express","Burger King","KFC"]
+         * ["Piatti","The Grill at Torrey Pines","Hungry Hunter Steakhouse","Shogun"]
+         */
 
-        $compare_list= [];
-        $list = [];
-        if (count($list1) >= count($list2)) {
-            $compare_list = $list1;
-            $list = $list2;
-        } else {
-            $compare_list = $list2;
-            $list = $list1;
-        }
-
-        $result = count($compare_list);
-        $result_val = [];
-        foreach($compare_list as $key => $item) {
-            if (in_array($item, $list)) {
-                $temp = $key + array_search($item,$list);
-                if ($result > $temp) {
-                    $result = $temp;
-                    $result_val[] = $item;
-                }
+        $list1 = array_flip($list1);
+        $list2 = array_flip($list2);
+        $min = 99999999999;
+        $intersect = [];
+        foreach($list1 as $name => $v){
+            if(!isset($list2[$name])){
+                continue;
+            }
+            if($v+$list2[$name] < $min){
+                $min = $v + $list2[$name];
+                $intersect = [$name];
+            }
+            else if($v+$list2[$name] == $min){
+                $intersect[] = $name;
             }
         }
-
-        return $result_val;
-
+        return $intersect; // ["Shogun"]
     }
 }
